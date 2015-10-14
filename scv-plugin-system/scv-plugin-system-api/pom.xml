@@ -27,11 +27,5 @@
       <!--<artifactId>polymer-code-dom</artifactId>-->
       <!--<version>${project.version}</version>-->
     <!--</dependency>-->
-
-    <!-- JSR Non-Null annotation -->
-    <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-    </dependency>
   </dependencies>
 </project>
