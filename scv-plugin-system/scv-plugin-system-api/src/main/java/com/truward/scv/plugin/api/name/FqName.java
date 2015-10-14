@@ -65,7 +65,7 @@ public final class FqName implements Comparable<FqName>, Serializable {
       throw new IllegalStateException("There is no parent of the root fqName");
     }
     return parent;
-  } 
+  }
 
   @Nonnull
   public List<String> toList() {
