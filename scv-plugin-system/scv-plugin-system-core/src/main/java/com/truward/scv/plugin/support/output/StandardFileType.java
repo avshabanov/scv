@@ -1,4 +1,4 @@
-package com.truward.scv.plugin.support.output2;
+package com.truward.scv.plugin.support.output;
 
 import javax.annotation.Nonnull;
 
@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
  *
  * @author Alexander Shabanov
  */
-@Deprecated
 public enum StandardFileType implements FileType {
   NONE(""),
   JAVA("java"),
@@ -18,8 +17,7 @@ public enum StandardFileType implements FileType {
   SQL("sql"),
   TXT("txt"),
   HTML("html");
-  
-  @Nonnull
+
   private final String extension;
 
   @Override

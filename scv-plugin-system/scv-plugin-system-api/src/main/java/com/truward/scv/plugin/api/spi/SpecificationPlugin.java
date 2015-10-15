@@ -1,4 +1,6 @@
-package com.truward.scv.plugin.api;
+package com.truward.scv.plugin.api.spi;
+
+import com.truward.scv.plugin.api.SpecificationProcessorModule;
 
 import javax.annotation.Nonnull;
 

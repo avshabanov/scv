@@ -7,7 +7,7 @@ import com.truward.scv.plugin.support.java.factory.DefaultJstFactory;
 import com.truward.scv.plugin.support.java.factory.JstFactory;
 import com.truward.scv.plugin.support.java.printer.JstPrinter;
 import com.truward.scv.plugin.support.java.util.JstFactorySupport;
-import com.truward.scv.plugin.support.output2.MemOutputStreamProvider;
+import com.truward.scv.plugin.support.output.MemOutputStreamProvider;
 import org.junit.Before;
 import org.junit.Test;
 

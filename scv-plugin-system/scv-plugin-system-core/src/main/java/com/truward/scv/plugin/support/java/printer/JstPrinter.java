@@ -8,9 +8,9 @@ import com.truward.scv.plugin.support.java.visitor.JstVisitor;
 import com.truward.scv.plugin.support.java.visitor.parent.JstParentAwareVisitor;
 import com.truward.scv.plugin.support.java.visitor.parent.ParentManager;
 import com.truward.scv.plugin.support.java.visitor.parent.ParentProvider;
-import com.truward.scv.plugin.support.output2.CAlikePrinter;
-import com.truward.scv.plugin.support.output2.OutputStreamProvider;
-import com.truward.scv.plugin.support.output2.StandardFileType;
+import com.truward.scv.plugin.support.output.CAlikePrinter;
+import com.truward.scv.plugin.support.output.OutputStreamProvider;
+import com.truward.scv.plugin.support.output.StandardFileType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
