@@ -7,6 +7,6 @@ import javax.annotation.Nonnull;
  *
  * @author Alexander Shabanov
  */
-public interface SpecificationProcessorModule {
+public interface SpecificationProcessorContext {
   void registerBean(@Nonnull Class<?> implementationClass);
 }

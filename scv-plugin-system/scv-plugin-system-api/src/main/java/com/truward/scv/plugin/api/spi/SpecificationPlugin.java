@@ -1,6 +1,6 @@
 package com.truward.scv.plugin.api.spi;
 
-import com.truward.scv.plugin.api.SpecificationProcessorModule;
+import com.truward.scv.plugin.api.SpecificationProcessorContext;
 
 import javax.annotation.Nonnull;
 
@@ -11,5 +11,5 @@ import javax.annotation.Nonnull;
  * @author Alexander Shabanov
  */
 public interface SpecificationPlugin {
-  void joinTo(@Nonnull SpecificationProcessorModule module);
+  void joinTo(@Nonnull SpecificationProcessorContext module);
 }

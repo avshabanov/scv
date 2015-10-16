@@ -9,7 +9,10 @@
   <name>SCV Parent Project</name>
 
   <modules>
+    <module>scv-specification</module>
     <module>scv-plugin-system</module>
+    <module>scv-cli</module>
+    <module>scv-contrib-plugins</module>
   </modules>
 
   <scm>

@@ -4,19 +4,13 @@
 
   <parent>
     <groupId>com.truward.scv</groupId>
-    <artifactId>scv-plugin-system</artifactId>
+    <artifactId>scv</artifactId>
     <version>0.1.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>scv-plugin-system-core</artifactId>
+  <artifactId>scv-specification</artifactId>
   <packaging>jar</packaging>
-  <name>SCV Plugin System API</name>
+  <name>SCV Specification Annotations</name>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.truward.scv</groupId>
-      <artifactId>scv-plugin-system-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
+  <dependencies/>
 </project>

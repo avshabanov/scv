@@ -3,19 +3,25 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.truward.scv</groupId>
-    <artifactId>scv-plugin-system</artifactId>
+    <groupId>com.truward.scv.contrib</groupId>
+    <artifactId>delegation-plugin</artifactId>
     <version>0.1.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>scv-plugin-system-core</artifactId>
+  <artifactId>delegation-plugin-processor</artifactId>
   <packaging>jar</packaging>
-  <name>SCV Plugin System API</name>
+  <name>Delegation Plugin API</name>
 
   <dependencies>
     <dependency>
+      <groupId>com.truward.scv.contrib</groupId>
+      <artifactId>delegation-plugin-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.truward.scv</groupId>
-      <artifactId>scv-plugin-system-api</artifactId>
+      <artifactId>scv-plugin-system-core</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
