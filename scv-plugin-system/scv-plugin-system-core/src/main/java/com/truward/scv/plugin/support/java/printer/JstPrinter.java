@@ -4,6 +4,7 @@ import com.truward.scv.plugin.api.name.FqName;
 import com.truward.scv.plugin.support.java.Jst;
 import com.truward.scv.plugin.support.java.JstFlag;
 import com.truward.scv.plugin.support.java.Operator;
+import com.truward.scv.plugin.support.java.util.JstManipulations;
 import com.truward.scv.plugin.support.java.visitor.JstVisitor;
 import com.truward.scv.plugin.support.java.visitor.parent.JstParentAwareVisitor;
 import com.truward.scv.plugin.support.java.visitor.parent.ParentManager;
@@ -51,14 +52,7 @@ public final class JstPrinter {
   //
 
   @Nonnull private Writer getWriter(@Nonnull Jst.Unit unit) throws IOException {
-    FqName result = unit.getPackageName();
-
-    if (!unit.getClasses().isEmpty()) {
-      // unit contains classes - use very first class to identify file name
-      // TODO: this won't work properly if first class is package local and one of the next classes defined in this unit is public
-      result = new FqName(unit.getClasses().get(0).getName(), result);
-    }
-
+    final FqName result = JstManipulations.getUnitName(unit);
     return new OutputStreamWriter(provider.createStreamForFile(result, StandardFileType.JAVA), StandardCharsets.UTF_8);
   }
 

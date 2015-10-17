@@ -13,7 +13,7 @@ import java.util.ServiceLoader;
 /**
  * Represents a dependency injection context that loads all the beans.
  */
-public final class DefaultProcessorContext implements SpecificationProcessorContext {
+public class DefaultProcessorContext implements SpecificationProcessorContext {
 
   private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -27,12 +27,7 @@ public final class DefaultProcessorContext implements SpecificationProcessorCont
     // general-purpose beans
     registerBean(SpecificationHandler.class);
 
-    // service-loader related
-    final ServiceLoader<SpecificationPlugin> driverServiceLoader = ServiceLoader.load(SpecificationPlugin.class);
-    for (final SpecificationPlugin driver : driverServiceLoader) {
-      log.info("Using driver: {}", driver);
-      driver.joinTo(this);
-    }
+    addSpecificationPlugins();
 
     log.info("SCV good to go sir!");
   }
@@ -44,5 +39,14 @@ public final class DefaultProcessorContext implements SpecificationProcessorCont
   @Override
   public void registerBean(@Nonnull Class<?> implementationClass) {
     getInjectionContext().registerBean(implementationClass);
+  }
+
+  protected void addSpecificationPlugins() {
+    // add plugins using ServiceLoader
+    final ServiceLoader<SpecificationPlugin> driverServiceLoader = ServiceLoader.load(SpecificationPlugin.class);
+    for (final SpecificationPlugin driver : driverServiceLoader) {
+      log.info("Using driver: {}", driver);
+      driver.joinTo(this);
+    }
   }
 }
