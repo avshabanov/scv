@@ -1,4 +1,4 @@
-package com.truward.scv.contrib.plugin.delegation.api.binding;
+package com.truward.scv.specification.filter;
 
 /**
  * Represents method filter for multiple classes.
