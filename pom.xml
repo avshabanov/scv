@@ -81,13 +81,6 @@
         <version>${slf4j.version}</version>
       </dependency>
 
-      <!-- Guava -->
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>18.0</version>
-      </dependency>
-
       <!-- JSR-305 for @Nonnull etc. -->
       <dependency>
         <groupId>com.google.code.findbugs</groupId>

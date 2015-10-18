@@ -12,5 +12,11 @@
   <packaging>jar</packaging>
   <name>Domain Plugin API</name>
 
-  <dependencies/>
+  <dependencies>
+    <dependency>
+      <groupId>com.truward.scv</groupId>
+      <artifactId>scv-specification</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>
