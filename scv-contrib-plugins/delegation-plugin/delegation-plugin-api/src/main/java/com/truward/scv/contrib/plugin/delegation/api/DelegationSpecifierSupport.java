@@ -8,13 +8,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Resource;
 
 /**
- * Helper class for specification classes.
+ * Helper for delegation specification classes.
  *
  * @author Alexander Shabanov
  */
 public abstract class DelegationSpecifierSupport implements DelegationSpecifier {
-  @Resource
   private DelegationSpecifier delegationSpecifier;
+
+  @Resource
+  public void setDelegationSpecifier(DelegationSpecifier specifier) {
+    this.delegationSpecifier = specifier;
+  }
 
   @Nonnull
   @Override

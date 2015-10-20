@@ -7,6 +7,8 @@ import com.truward.scv.specification.Target;
 import javax.annotation.Nonnull;
 
 /**
+ * A specification creator for delegation targets.
+ *
  * @author Alexander Shabanov
  */
 public interface DelegationSpecifier {

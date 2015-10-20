@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.truward.scv.contrib</groupId>
+    <artifactId>pojo-plugin</artifactId>
+    <version>0.1.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>pojo-plugin-processor</artifactId>
+  <packaging>jar</packaging>
+  <name>POJO Plugin Processor</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.truward.scv.contrib</groupId>
+      <artifactId>pojo-plugin-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.truward.scv</groupId>
+      <artifactId>scv-plugin-system-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>
