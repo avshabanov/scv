@@ -31,6 +31,11 @@ public final class Target {
     return new Target(className);
   }
 
+  @Nonnull
+  public String getClassName() {
+    return className;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

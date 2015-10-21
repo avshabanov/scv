@@ -1,6 +1,6 @@
-package com.truward.scv.plugin.support.java;
+package com.truward.scv.plugin.support.java.jst;
 
-import com.truward.scv.plugin.support.java.visitor.JstVisitor;
+import com.truward.scv.plugin.support.java.jst.visitor.JstVisitor;
 import com.truward.scv.plugin.api.name.FqName;
 
 import javax.annotation.Nonnull;

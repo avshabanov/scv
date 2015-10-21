@@ -1,9 +1,9 @@
-package com.truward.scv.plugin.support.java.factory;
+package com.truward.scv.plugin.support.java.jst.factory;
 
 import com.truward.scv.plugin.api.name.FqName;
-import com.truward.scv.plugin.support.java.Jst;
-import com.truward.scv.plugin.support.java.Operator;
-import com.truward.scv.plugin.support.java.TypeBoundKind;
+import com.truward.scv.plugin.support.java.jst.Jst;
+import com.truward.scv.plugin.support.java.jst.Operator;
+import com.truward.scv.plugin.support.java.jst.TypeBoundKind;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

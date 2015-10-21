@@ -1,4 +1,4 @@
-package com.truward.scv.plugin.support.java.printer;
+package com.truward.scv.plugin.support.java.jst.printer;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;

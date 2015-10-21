@@ -1,12 +1,12 @@
 package com.truward.scv.plugin.support;
 
 import com.truward.scv.plugin.api.name.FqName;
-import com.truward.scv.plugin.support.java.Jst;
-import com.truward.scv.plugin.support.java.Operator;
-import com.truward.scv.plugin.support.java.factory.DefaultJstFactory;
-import com.truward.scv.plugin.support.java.factory.JstFactory;
-import com.truward.scv.plugin.support.java.printer.JstPrinter;
-import com.truward.scv.plugin.support.java.util.JstFactorySupport;
+import com.truward.scv.plugin.support.java.jst.Jst;
+import com.truward.scv.plugin.support.java.jst.Operator;
+import com.truward.scv.plugin.support.java.jst.factory.DefaultJstFactory;
+import com.truward.scv.plugin.support.java.jst.factory.JstFactory;
+import com.truward.scv.plugin.support.java.jst.printer.JstPrinter;
+import com.truward.scv.plugin.support.java.jst.util.JstFactorySupport;
 import com.truward.scv.plugin.support.output.MemOutputStreamProvider;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +18,14 @@ import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static com.truward.scv.plugin.support.java.JstFlag.ABSTRACT;
-import static com.truward.scv.plugin.support.java.JstFlag.ANNOTATION;
-import static com.truward.scv.plugin.support.java.JstFlag.FINAL;
-import static com.truward.scv.plugin.support.java.JstFlag.INTERFACE;
-import static com.truward.scv.plugin.support.java.JstFlag.PRIVATE;
-import static com.truward.scv.plugin.support.java.JstFlag.PUBLIC;
-import static com.truward.scv.plugin.support.java.JstFlag.STATIC;
-import static com.truward.scv.plugin.support.java.JstFlag.STRICTFP;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.ABSTRACT;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.ANNOTATION;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.FINAL;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.INTERFACE;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.PRIVATE;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.PUBLIC;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.STATIC;
+import static com.truward.scv.plugin.support.java.jst.JstFlag.STRICTFP;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

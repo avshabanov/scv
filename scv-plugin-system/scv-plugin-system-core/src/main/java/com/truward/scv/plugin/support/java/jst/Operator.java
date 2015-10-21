@@ -1,4 +1,4 @@
-package com.truward.scv.plugin.support.java;
+package com.truward.scv.plugin.support.java.jst;
 
 import javax.annotation.Nonnull;
 

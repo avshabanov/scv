@@ -1,9 +1,9 @@
 package com.truward.scv.plugin.support;
 
 import com.truward.scv.plugin.api.name.FqName;
-import com.truward.scv.plugin.support.java.Jst;
-import com.truward.scv.plugin.support.java.factory.DefaultJstFactory;
-import com.truward.scv.plugin.support.java.factory.JstFactory;
+import com.truward.scv.plugin.support.java.jst.Jst;
+import com.truward.scv.plugin.support.java.jst.factory.DefaultJstFactory;
+import com.truward.scv.plugin.support.java.jst.factory.JstFactory;
 import org.junit.Before;
 import org.junit.Test;
 

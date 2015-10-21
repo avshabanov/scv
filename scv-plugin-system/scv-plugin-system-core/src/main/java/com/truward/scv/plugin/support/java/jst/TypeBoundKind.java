@@ -1,4 +1,4 @@
-package com.truward.scv.plugin.support.java;
+package com.truward.scv.plugin.support.java.jst;
 
 /**
  * Type of bounding kind for the generic types.

@@ -1,10 +1,10 @@
-package com.truward.scv.plugin.support.java.util;
+package com.truward.scv.plugin.support.java.jst.util;
 
 import com.truward.scv.plugin.api.name.FqName;
-import com.truward.scv.plugin.support.java.Jst;
-import com.truward.scv.plugin.support.java.JstFlag;
-import com.truward.scv.plugin.support.java.Operator;
-import com.truward.scv.plugin.support.java.factory.JstFactory;
+import com.truward.scv.plugin.support.java.jst.Jst;
+import com.truward.scv.plugin.support.java.jst.JstFlag;
+import com.truward.scv.plugin.support.java.jst.Operator;
+import com.truward.scv.plugin.support.java.jst.factory.JstFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

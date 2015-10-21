@@ -1,7 +1,7 @@
-package com.truward.scv.plugin.support.java.visitor.parent;
+package com.truward.scv.plugin.support.java.jst.visitor.parent;
 
-import com.truward.scv.plugin.support.java.Jst;
-import com.truward.scv.plugin.support.java.visitor.JstVisitor;
+import com.truward.scv.plugin.support.java.jst.Jst;
+import com.truward.scv.plugin.support.java.jst.visitor.JstVisitor;
 
 import javax.annotation.Nonnull;
 

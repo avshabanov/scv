@@ -1,14 +1,14 @@
-package com.truward.scv.plugin.support.java.printer;
+package com.truward.scv.plugin.support.java.jst.printer;
 
 import com.truward.scv.plugin.api.name.FqName;
-import com.truward.scv.plugin.support.java.Jst;
-import com.truward.scv.plugin.support.java.JstFlag;
-import com.truward.scv.plugin.support.java.Operator;
-import com.truward.scv.plugin.support.java.util.JstManipulations;
-import com.truward.scv.plugin.support.java.visitor.JstVisitor;
-import com.truward.scv.plugin.support.java.visitor.parent.JstParentAwareVisitor;
-import com.truward.scv.plugin.support.java.visitor.parent.ParentManager;
-import com.truward.scv.plugin.support.java.visitor.parent.ParentProvider;
+import com.truward.scv.plugin.support.java.jst.Jst;
+import com.truward.scv.plugin.support.java.jst.JstFlag;
+import com.truward.scv.plugin.support.java.jst.Operator;
+import com.truward.scv.plugin.support.java.jst.util.JstManipulations;
+import com.truward.scv.plugin.support.java.jst.visitor.JstVisitor;
+import com.truward.scv.plugin.support.java.jst.visitor.parent.JstParentAwareVisitor;
+import com.truward.scv.plugin.support.java.jst.visitor.parent.ParentManager;
+import com.truward.scv.plugin.support.java.jst.visitor.parent.ParentProvider;
 import com.truward.scv.plugin.support.output.CAlikePrinter;
 import com.truward.scv.plugin.support.output.OutputStreamProvider;
 import com.truward.scv.plugin.support.output.StandardFileType;
