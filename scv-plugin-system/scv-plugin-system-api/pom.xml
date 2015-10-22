@@ -13,19 +13,10 @@
   <name>SCV Plugin System API</name>
 
   <dependencies>
-    <!-- Public facing interface to domain model -->
-
-    <!--&lt;!&ndash; Micro dependency injection &ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>com.truward.di</groupId>-->
-      <!--<artifactId>micro-di</artifactId>-->
-      <!--<version>1.0.11</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>com.truward.polymer</groupId>-->
-      <!--<artifactId>polymer-code-dom</artifactId>-->
-      <!--<version>${project.version}</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>com.truward.scv</groupId>
+      <artifactId>scv-specification</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 </project>

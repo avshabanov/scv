@@ -1,4 +1,4 @@
-package com.truward.scv.cli.util;
+package com.truward.scv.cli.support.util;
 
 import java.io.File;
 import java.io.IOException;

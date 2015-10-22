@@ -2,6 +2,7 @@ package com.truward.scv.cli.processor;
 
 import com.truward.di.InjectionContext;
 import com.truward.di.support.DefaultInjectionContext;
+import com.truward.scv.cli.support.DefaultProject;
 import com.truward.scv.plugin.api.SpecificationProcessorContext;
 import com.truward.scv.plugin.api.spi.SpecificationPlugin;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class DefaultProcessorContext implements SpecificationProcessorContext {
   public void addDefaults() {
     // general-purpose beans
     registerBean(SpecificationHandler.class);
+    registerBean(DefaultProject.class);
 
     addSpecificationPlugins();
 

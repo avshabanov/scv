@@ -2,7 +2,6 @@ package com.truward.scv.contrib.plugin.pojo.api;
 
 import com.truward.scv.contrib.plugin.pojo.api.binding.MultiplePojoTargets;
 import com.truward.scv.contrib.plugin.pojo.api.binding.PojoTarget;
-import com.truward.scv.specification.Target;
 
 import javax.annotation.Nonnull;
 
@@ -18,13 +17,13 @@ public abstract class PojoSpecifierSupport implements PojoSpecifier {
 
   @Nonnull
   @Override
-  public <T> PojoTarget<T> create(@Nonnull Target target, @Nonnull Class<T> clazz) {
-    return pojoSpecifier.create(target, clazz);
+  public <T> PojoTarget<T> forClass(@Nonnull Class<T> clazz) {
+    return pojoSpecifier.forClass(clazz);
   }
 
   @Nonnull
   @Override
-  public MultiplePojoTargets create(@Nonnull Target target, @Nonnull Class... classes) {
-    return pojoSpecifier.create(target, classes);
+  public MultiplePojoTargets forClasses(@Nonnull Class... classes) {
+    return pojoSpecifier.forClasses(classes);
   }
 }

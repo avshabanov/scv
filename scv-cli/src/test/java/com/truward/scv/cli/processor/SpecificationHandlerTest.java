@@ -2,7 +2,7 @@ package com.truward.scv.cli.processor;
 
 import com.truward.di.InjectionContext;
 import com.truward.di.support.DefaultInjectionContext;
-import com.truward.scv.specification.Specification;
+import com.truward.scv.specification.annotation.Specification;
 import org.junit.Before;
 import org.junit.Test;
 

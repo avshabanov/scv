@@ -1,12 +1,12 @@
 package com.truward.scv.contrib.plugin.delegation.processor.support;
 
 import com.truward.scv.contrib.plugin.delegation.api.DelegationSpecifier;
-import com.truward.scv.contrib.plugin.delegation.api.binding.DelegationTarget;
-import com.truward.scv.contrib.plugin.delegation.api.binding.MultipleDelegationTargets;
-import com.truward.scv.plugin.api.name.FqName;
+import com.truward.scv.contrib.plugin.delegation.api.binding.ClassDelegationAction;
+import com.truward.scv.contrib.plugin.delegation.api.binding.MultipleDelegationActions;
+import com.truward.scv.contrib.plugin.delegation.processor.action.Action;
 import com.truward.scv.plugin.api.output.Project;
-import com.truward.scv.plugin.support.java.JavaProjectFile;
-import com.truward.scv.specification.Target;
+import com.truward.scv.plugin.support.filter.DefaultClassMethodFilter;
+import com.truward.scv.specification.filter.ClassMethodFilter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Resource;
@@ -20,14 +20,31 @@ public final class DefaultDelegationSpecifier implements DelegationSpecifier {
 
   @Nonnull
   @Override
-  public <T> DelegationTarget<T> create(@Nonnull Target target, @Nonnull Class<T> clazz) {
-    final JavaProjectFile pf = project.addFile(FqName.valueOf(target.getClassName()), JavaProjectFile.class);
-    throw new UnsupportedOperationException();
+  public <T> ClassDelegationAction<T> forClass(@Nonnull Class<T> interfaceClass) {
+    // TODO: remove target
+    return new DefaultClassDelegationAction<>(interfaceClass);
   }
 
   @Nonnull
   @Override
-  public MultipleDelegationTargets create(@Nonnull Target target, @Nonnull Class... classes) {
+  public MultipleDelegationActions forClasses(@Nonnull Class... interfaceClasses) {
     throw new UnsupportedOperationException();
+  }
+
+  //
+  // Private
+  //
+
+  private static final class DefaultClassDelegationAction<T> extends AbstractDelegationActions<ClassMethodFilter<T>> implements ClassDelegationAction<T> {
+    private final Class<T> interfaceClass;
+
+    public DefaultClassDelegationAction(Class<T> interfaceClass) {
+      this.interfaceClass = interfaceClass;
+    }
+
+    @Override
+    protected ClassMethodFilter<T> createFilter(Action action) {
+      return new DefaultClassMethodFilter(interfaceClass);
+    }
   }
 }

@@ -5,7 +5,7 @@ import com.truward.di.InjectionException;
 import com.truward.scv.plugin.api.SpecificationParameterProvider;
 import com.truward.scv.plugin.api.SpecificationState;
 import com.truward.scv.plugin.api.SpecificationStateAware;
-import com.truward.scv.specification.Specification;
+import com.truward.scv.specification.annotation.Specification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -178,16 +178,54 @@ public final class SpecificationHandler {
   private List<Object> provideResources(@Nonnull Class<?> clazz, @Nonnull Object instance) {
     final List<Object> providedResources = new ArrayList<>();
     try {
+      // for @Resource fields
       for (final Field field : clazz.getDeclaredFields()) {
         final Object providedResource = provideFieldValue(clazz, instance, field);
         if (providedResource != null) {
           providedResources.add(providedResource);
         }
       }
-    } catch (IllegalAccessException e) {
+
+      // for @Resource setters
+      for (final Method method : clazz.getMethods()) {
+        final Object providedResource = provideMethodValue(clazz, instance, method);
+        if (providedResource != null) {
+          providedResources.add(providedResource);
+        }
+      }
+    } catch (IllegalAccessException | InvocationTargetException e) {
       throw new RuntimeException("Unable to set field value", e);
     }
     return Collections.unmodifiableList(providedResources);
+  }
+
+  @Nullable
+  private Object provideMethodValue(Class<?> clazz, Object instance, Method method) throws InvocationTargetException, IllegalAccessException {
+    final Resource resource = method.getAnnotation(Resource.class);
+    if (resource == null) {
+      return null;
+    }
+
+    warnIfMappedNameSet(resource, clazz, method);
+
+    final Class[] parameterTypes = method.getParameterTypes();
+    if (parameterTypes.length != 1) {
+      throw new IllegalStateException("Method annotated with @Resource should take exactly one parameter");
+    }
+
+    final Class<?> type = parameterTypes[0];
+
+    final Object injectedBean;
+    try {
+      injectedBean = injectionContext.getBean(type);
+    } catch (InjectionException e) {
+      throw new RuntimeException(String.format("Can't inject bean of class %s in method %s of %s", type, method,
+          clazz), e);
+    }
+
+    method.invoke(instance, injectedBean);
+
+    return injectedBean;
   }
 
   @Nullable
@@ -197,9 +235,7 @@ public final class SpecificationHandler {
       return null;
     }
 
-    if (resource.mappedName().length() > 0) {
-      log.warn("Resource name ignored: {} for {} in {}", resource.mappedName(), clazz, field);
-    }
+    warnIfMappedNameSet(resource, clazz, field);
 
     boolean wasAccessible = field.isAccessible();
     field.setAccessible(true);
@@ -219,6 +255,12 @@ public final class SpecificationHandler {
     }
 
     return injectedBean;
+  }
+
+  private void warnIfMappedNameSet(Resource resource, Class<?> clazz, Object fieldOrMethod) {
+    if (resource.mappedName().length() > 0) {
+      log.warn("Resource name ignored: {} for {} in {}", resource.mappedName(), fieldOrMethod, clazz);
+    }
   }
 
   private static void notifyStateChanged(@Nonnull Collection<? extends SpecificationStateAware> stateAwareBeans,

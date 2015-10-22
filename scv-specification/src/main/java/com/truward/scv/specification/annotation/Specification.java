@@ -1,4 +1,4 @@
-package com.truward.scv.specification;
+package com.truward.scv.specification.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

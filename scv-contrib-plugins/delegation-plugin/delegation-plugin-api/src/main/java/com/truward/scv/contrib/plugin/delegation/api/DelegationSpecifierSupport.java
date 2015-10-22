@@ -1,8 +1,7 @@
 package com.truward.scv.contrib.plugin.delegation.api;
 
-import com.truward.scv.contrib.plugin.delegation.api.binding.DelegationTarget;
-import com.truward.scv.contrib.plugin.delegation.api.binding.MultipleDelegationTargets;
-import com.truward.scv.specification.Target;
+import com.truward.scv.contrib.plugin.delegation.api.binding.ClassDelegationAction;
+import com.truward.scv.contrib.plugin.delegation.api.binding.MultipleDelegationActions;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Resource;
@@ -22,13 +21,13 @@ public abstract class DelegationSpecifierSupport implements DelegationSpecifier 
 
   @Nonnull
   @Override
-  public <T> DelegationTarget<T> create(@Nonnull Target target, @Nonnull Class<T> clazz) {
-    return delegationSpecifier.create(target, clazz);
+  public <T> ClassDelegationAction<T> forClass(@Nonnull Class<T> interfaceClass) {
+    return delegationSpecifier.forClass(interfaceClass);
   }
 
   @Nonnull
   @Override
-  public MultipleDelegationTargets create(@Nonnull Target target, @Nonnull Class... classes) {
-    return delegationSpecifier.create(target, classes);
+  public MultipleDelegationActions forClasses(@Nonnull Class... interfaceClasses) {
+    return delegationSpecifier.forClasses(interfaceClasses);
   }
 }

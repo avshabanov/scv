@@ -7,5 +7,5 @@ import com.truward.scv.specification.filter.ClassMethodFilter;
  *
  * @author Alexander Shabanov
  */
-public interface DelegationTarget<T> extends DelegationActions<ClassMethodFilter<T>> {
+public interface ClassDelegationAction<T> extends DelegationActions<ClassMethodFilter<T>> {
 }

@@ -12,8 +12,8 @@ import javax.annotation.Nonnull;
 public interface PojoSpecifier {
 
   @Nonnull
-  <T> PojoTarget<T> create(@Nonnull Target target, @Nonnull Class<T> clazz);
+  <T> PojoTarget<T> forClass(@Nonnull Class<T> clazz);
 
   @Nonnull
-  MultiplePojoTargets create(@Nonnull Target target, @Nonnull Class... classes);
+  MultiplePojoTargets forClasses(@Nonnull Class... classes);
 }
