@@ -32,7 +32,7 @@
     <!-- Plugin execution core -->
     <dependency>
       <groupId>com.truward.scv</groupId>
-      <artifactId>scv-plugin-system-core</artifactId>
+      <artifactId>scv-plugin-system-java-core</artifactId>
       <version>${project.version}</version>
     </dependency>
 

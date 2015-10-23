@@ -4,19 +4,15 @@ import com.truward.scv.contrib.plugin.delegation.api.DelegationSpecifier;
 import com.truward.scv.contrib.plugin.delegation.api.binding.ClassDelegationAction;
 import com.truward.scv.contrib.plugin.delegation.api.binding.MultipleDelegationActions;
 import com.truward.scv.contrib.plugin.delegation.processor.action.Action;
-import com.truward.scv.plugin.api.output.Project;
 import com.truward.scv.plugin.support.filter.DefaultClassMethodFilter;
 import com.truward.scv.specification.filter.ClassMethodFilter;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
 
 /**
  * Default implementation of delegation specifier.
  */
 public final class DefaultDelegationSpecifier implements DelegationSpecifier {
-  @Resource
-  private Project project;
 
   @Nonnull
   @Override
@@ -44,7 +40,7 @@ public final class DefaultDelegationSpecifier implements DelegationSpecifier {
 
     @Override
     protected ClassMethodFilter<T> createFilter(Action action) {
-      return new DefaultClassMethodFilter(interfaceClass);
+      return new DefaultClassMethodFilter<>(interfaceClass);
     }
   }
 }

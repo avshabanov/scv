@@ -51,7 +51,7 @@ public final class DelegationSpecifierSupportTest {
   }
 
   @TargetMapping({
-      @TargetMappingEntry(source = Foo.class, targetClassName = "test.delegation.generated.CreateTest")
+      @TargetMappingEntry(source = Foo.class, targetName = "test.delegation.generated.CreateTest")
   })
   private static final class SampleSpec extends DelegationSpecifierSupport {
     @Specification

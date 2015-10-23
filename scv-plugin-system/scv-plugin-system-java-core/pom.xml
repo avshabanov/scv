@@ -3,25 +3,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.truward.scv.contrib</groupId>
-    <artifactId>pojo-plugin</artifactId>
+    <groupId>com.truward.scv</groupId>
+    <artifactId>scv-plugin-system</artifactId>
     <version>0.1.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>pojo-plugin-processor</artifactId>
+  <artifactId>scv-plugin-system-java-core</artifactId>
   <packaging>jar</packaging>
-  <name>POJO Plugin Processor</name>
+  <name>SCV Plugin System Java Core</name>
 
   <dependencies>
     <dependency>
-      <groupId>com.truward.scv.contrib</groupId>
-      <artifactId>pojo-plugin-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>com.truward.scv</groupId>
-      <artifactId>scv-plugin-system-java-core</artifactId>
+      <artifactId>scv-plugin-system-api</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

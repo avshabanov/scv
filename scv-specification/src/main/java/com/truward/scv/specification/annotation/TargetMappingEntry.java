@@ -13,6 +13,18 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 public @interface TargetMappingEntry {
+
+  /**
+   * A list of classes mapped to certain target.
+   *
+   * @return List of source classes
+   */
   Class[] source();
-  String targetClassName();
+
+  /**
+   * Specially coded target name, e.g. {@code com.mycompany.generated.FooImpl}
+   *
+   * @return Coded target name
+   */
+  String targetName();
 }

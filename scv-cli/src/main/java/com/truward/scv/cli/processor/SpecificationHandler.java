@@ -6,6 +6,7 @@ import com.truward.scv.plugin.api.SpecificationParameterProvider;
 import com.truward.scv.plugin.api.SpecificationState;
 import com.truward.scv.plugin.api.SpecificationStateAware;
 import com.truward.scv.specification.annotation.Specification;
+import com.truward.scv.specification.annotation.TargetMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +35,9 @@ public final class SpecificationHandler {
   @Resource
   private InjectionContext injectionContext;
 
+  @Resource
+  private TargetMappingProcessor targetMappingProcessor;
+
   @Nullable
   public <T> T parseClass(@Nonnull Class<T> clazz) {
     log.debug("Parsing {}", clazz);
@@ -42,6 +46,14 @@ public final class SpecificationHandler {
       log.warn("Skipping {}: interface or abstract class can't be processed", clazz);
       return null;
     }
+
+    final TargetMapping targetMapping = clazz.getAnnotation(TargetMapping.class);
+    if (targetMapping != null) {
+      targetMappingProcessor.setTargetMapping(targetMapping);
+    } else {
+      targetMappingProcessor.setNoTargetMapping();
+    }
+
 
     final List<Method> specificationMethods = new ArrayList<>();
     for (final Method method : clazz.getMethods()) {
@@ -70,6 +82,8 @@ public final class SpecificationHandler {
 
       // invoke in the given order
       invokeSpecificationMethods(specificationMethods, instance, stateAwareBeans);
+
+      targetMappingProcessor.finalizeMappings();
 
       log.debug("{} has been successfully processed", clazz);
       return instance;

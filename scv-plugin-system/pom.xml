@@ -14,6 +14,6 @@
 
   <modules>
     <module>scv-plugin-system-api</module>
-    <module>scv-plugin-system-core</module>
+    <module>scv-plugin-system-java-core</module>
   </modules>
 </project>

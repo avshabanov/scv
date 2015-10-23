@@ -40,7 +40,7 @@ public final class DelegationPluginIntegrationTest {
   }
 
   @TargetMapping({
-      @TargetMappingEntry(source = Foo.class, targetClassName = "integTest.generated.FooDelegate")
+      @TargetMappingEntry(source = Foo.class, targetName = "integTest.generated.FooDelegate")
   })
   public static final class SampleSpecification extends DelegationSpecifierSupport {
 

@@ -53,7 +53,7 @@ public final class PojoSpecifierSupportTest {
   }
 
   @TargetMapping(@TargetMappingEntry(source = {User.class, Manager.class, UserProfile.class},
-      targetClassName = "test.pojo.UserModel"))
+      targetName = "test.pojo.UserModel"))
   private static final class SampleSpec extends PojoSpecifierSupport {
 
     @Specification

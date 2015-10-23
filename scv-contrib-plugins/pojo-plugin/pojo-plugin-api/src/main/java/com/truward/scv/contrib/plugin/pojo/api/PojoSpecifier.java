@@ -2,7 +2,6 @@ package com.truward.scv.contrib.plugin.pojo.api;
 
 import com.truward.scv.contrib.plugin.pojo.api.binding.MultiplePojoTargets;
 import com.truward.scv.contrib.plugin.pojo.api.binding.PojoTarget;
-import com.truward.scv.specification.Target;
 
 import javax.annotation.Nonnull;
 
