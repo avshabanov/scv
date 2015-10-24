@@ -2,11 +2,11 @@ package com.truward.scv.cli.processor;
 
 import com.truward.di.InjectionContext;
 import com.truward.di.InjectionException;
+import com.truward.scv.cli.mapping.TargetMappingProcessor;
 import com.truward.scv.plugin.api.SpecificationParameterProvider;
 import com.truward.scv.plugin.api.SpecificationState;
 import com.truward.scv.plugin.api.SpecificationStateAware;
 import com.truward.scv.specification.annotation.Specification;
-import com.truward.scv.specification.annotation.TargetMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +18,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Handler for methods, annotated with {@link Specification} annotations.
@@ -39,37 +34,31 @@ public final class SpecificationHandler {
   private TargetMappingProcessor targetMappingProcessor;
 
   @Nullable
-  public <T> T parseClass(@Nonnull Class<T> clazz) {
-    log.debug("Parsing {}", clazz);
+  public <T> T parseClass(@Nonnull Class<T> specificationClass) {
+    log.debug("Parsing {}", specificationClass);
 
-    if (clazz.isInterface() || Modifier.isAbstract(clazz.getModifiers())) {
-      log.warn("Skipping {}: interface or abstract class can't be processed", clazz);
+    if (specificationClass.isInterface() || Modifier.isAbstract(specificationClass.getModifiers())) {
+      log.warn("Skipping {}: interface or abstract class can't be processed", specificationClass);
       return null;
     }
 
-    final TargetMapping targetMapping = clazz.getAnnotation(TargetMapping.class);
-    if (targetMapping != null) {
-      targetMappingProcessor.setTargetMapping(targetMapping);
-    } else {
-      targetMappingProcessor.setNoTargetMapping();
-    }
-
+    targetMappingProcessor.addMappingsFrom(specificationClass);
 
     final List<Method> specificationMethods = new ArrayList<>();
-    for (final Method method : clazz.getMethods()) {
+    for (final Method method : specificationClass.getMethods()) {
       if (method.getAnnotation(Specification.class) != null) {
         specificationMethods.add(method);
       }
     }
 
     if (specificationMethods.isEmpty()) {
-      log.warn("No specification methods in {}", clazz);
+      log.warn("No specification methods in {}", specificationClass);
       return null;
     }
 
     try {
-      final T instance = clazz.newInstance();
-      final List<Object> resources = provideResources(clazz, instance);
+      final T instance = specificationClass.newInstance();
+      final List<Object> resources = provideResources(specificationClass, instance);
       final List<SpecificationStateAware> stateAwareBeans = new ArrayList<>();
       for (final Object resource : resources) {
         if (resource instanceof SpecificationStateAware) {
@@ -83,12 +72,10 @@ public final class SpecificationHandler {
       // invoke in the given order
       invokeSpecificationMethods(specificationMethods, instance, stateAwareBeans);
 
-      targetMappingProcessor.finalizeMappings();
-
-      log.debug("{} has been successfully processed", clazz);
+      log.debug("{} has been successfully processed", specificationClass);
       return instance;
     } catch (InstantiationException | IllegalAccessException e) {
-      throw new RuntimeException("Uninstantiable " + clazz + ": no public default constructor", e);
+      throw new RuntimeException("Uninstantiable " + specificationClass + ": no public default constructor", e);
     }
   }
 
@@ -150,7 +137,8 @@ public final class SpecificationHandler {
     if (parameterCount > 0) {
       final Annotation[][] paramListAnnotations = method.getParameterAnnotations();
       parameters = new Object[parameterCount];
-      final List<SpecificationParameterProvider> parameterProviders = injectionContext.getBeans(SpecificationParameterProvider.class);
+      final List<SpecificationParameterProvider> parameterProviders = injectionContext
+          .getBeans(SpecificationParameterProvider.class);
       if (parameterProviders.size() == 0) {
         throw new RuntimeException("No specification parameter provides; method parameters will be left unprovided");
       }
@@ -214,7 +202,8 @@ public final class SpecificationHandler {
   }
 
   @Nullable
-  private Object provideMethodValue(Class<?> clazz, Object instance, Method method) throws InvocationTargetException, IllegalAccessException {
+  private Object provideMethodValue(Class<?> clazz, Object instance, Method method)
+      throws InvocationTargetException, IllegalAccessException {
     final Resource resource = method.getAnnotation(Resource.class);
     if (resource == null) {
       return null;
