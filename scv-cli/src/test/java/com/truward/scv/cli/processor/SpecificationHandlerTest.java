@@ -2,9 +2,14 @@ package com.truward.scv.cli.processor;
 
 import com.truward.di.InjectionContext;
 import com.truward.di.support.DefaultInjectionContext;
+import com.truward.scv.cli.mapping.support.DefaultTargetMappingService;
 import com.truward.scv.specification.annotation.Specification;
+import com.truward.scv.specification.annotation.TargetMapping;
+import com.truward.scv.specification.annotation.TargetMappingEntry;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.Serializable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -20,6 +25,7 @@ public final class SpecificationHandlerTest {
   public void init() {
     final InjectionContext context = new DefaultInjectionContext();
     context.registerBean(SpecificationHandler.class);
+    context.registerBean(DefaultTargetMappingService.class);
     specificationHandler = context.getBean(SpecificationHandler.class);
   }
 
@@ -69,6 +75,9 @@ public final class SpecificationHandlerTest {
     }
   }
 
+  @TargetMapping({
+      @TargetMappingEntry(source = Serializable.class, targetName = "my.generated.SerializableImpl")
+  })
   public static final class OrderedSpec1 extends OrdinalSumProvider {
     @Specification(priority = 1)
     public void spec1() {

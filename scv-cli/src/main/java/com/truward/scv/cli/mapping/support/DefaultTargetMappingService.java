@@ -93,7 +93,33 @@ public final class DefaultTargetMappingService implements TargetMappingProcessor
     }
 
     for (final Class<?> interfaceEntry : interfaceEntries) {
-      // TODO: impl
+      final MappedTargetImpl anotherTarget = mappings.get(interfaceEntry);
+      if (anotherTarget != null) {
+        if (anotherTarget != target) {
+          throw new RuntimeException("Conflicting target definition in " + specificationClass + " for " +
+              interfaceEntry + ", previous=" + anotherTarget + ", given=" + targetName);
+        }
+        continue; // already mapped to this target
+      }
+
+      target.mappedClasses.add(new MappedClassImpl(interfaceEntry, getUniqueName(interfaceEntry, target), target));
+    }
+  }
+
+  private static String getUniqueName(Class<?> sourceClass, MappedTarget target) {
+    for (int i = 0;; ++i) {
+      final String innerClassName = (i > 0 ? sourceClass.getSimpleName() + i : sourceClass.getSimpleName());
+      boolean found = false;
+      for (MappedClass mappedClass : target.getMappedClasses()) {
+        if (mappedClass.getTargetName().equals(innerClassName)) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        return innerClassName;
+      }
     }
   }
 
