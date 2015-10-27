@@ -3,6 +3,7 @@ package com.truward.scv.cli.mapping.support;
 import com.truward.scv.cli.mapping.MappedClass;
 import com.truward.scv.cli.mapping.MappedTarget;
 import com.truward.scv.cli.mapping.TargetMappingProcessor;
+import com.truward.scv.cli.mapping.TargetMappingProvider;
 import com.truward.scv.plugin.api.name.FqName;
 import com.truward.scv.specification.annotation.TargetMapping;
 import com.truward.scv.specification.annotation.TargetMappingEntry;
@@ -11,12 +12,18 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Alexander Shabanov
  */
-public final class DefaultTargetMappingService implements TargetMappingProcessor {
+public final class DefaultTargetMappingService implements TargetMappingProcessor, TargetMappingProvider {
   private final Logger log = LoggerFactory.getLogger(getClass());
   private final Map<Class<?>, MappedTargetImpl> mappings = new HashMap<>(500);
 
@@ -47,6 +54,12 @@ public final class DefaultTargetMappingService implements TargetMappingProcessor
 
       addMultipleEntries(specificationClass, interfaceClasses, targetName);
     }
+  }
+
+  @Override
+  public List<MappedTarget> getMappedTargets() {
+    final Set<MappedTargetImpl> mappedTargets = new HashSet<>(mappings.values());
+    return Collections.unmodifiableList(new ArrayList<MappedTarget>(mappedTargets));
   }
 
   //

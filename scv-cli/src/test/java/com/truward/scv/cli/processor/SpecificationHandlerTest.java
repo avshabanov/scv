@@ -2,6 +2,9 @@ package com.truward.scv.cli.processor;
 
 import com.truward.di.InjectionContext;
 import com.truward.di.support.DefaultInjectionContext;
+import com.truward.scv.cli.mapping.MappedClass;
+import com.truward.scv.cli.mapping.MappedTarget;
+import com.truward.scv.cli.mapping.TargetMappingProvider;
 import com.truward.scv.cli.mapping.support.DefaultTargetMappingService;
 import com.truward.scv.specification.annotation.Specification;
 import com.truward.scv.specification.annotation.TargetMapping;
@@ -10,16 +13,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link SpecificationHandler}.
  */
 public final class SpecificationHandlerTest {
   private SpecificationHandler specificationHandler;
-
+  private TargetMappingProvider mappingProvider;
 
   @Before
   public void init() {
@@ -27,6 +32,7 @@ public final class SpecificationHandlerTest {
     context.registerBean(SpecificationHandler.class);
     context.registerBean(DefaultTargetMappingService.class);
     specificationHandler = context.getBean(SpecificationHandler.class);
+    mappingProvider = context.getBean(TargetMappingProvider.class);
   }
 
   @Test
@@ -46,6 +52,31 @@ public final class SpecificationHandlerTest {
     sumProvider = specificationHandler.parseClass(OrderedSpec2.class);
     assertNotNull(sumProvider);
     assertEquals("Accumulated ordinal sum should be 123", 123, sumProvider.getOrdinalOrderSum());
+  }
+
+  @Test
+  public void shouldProcessNoTargetEntries() {
+    final NoMappingSpec spec = specificationHandler.parseClass(NoMappingSpec.class);
+    assertNotNull(spec);
+
+    final List<MappedTarget> mappedTargets = mappingProvider.getMappedTargets();
+    assertTrue(mappedTargets.isEmpty());
+  }
+
+  @Test
+  public void shouldProcessTargetEntries() {
+    final TargetMappingSpec spec = specificationHandler.parseClass(TargetMappingSpec.class);
+    assertNotNull(spec);
+
+    final List<MappedTarget> mappedTargets = mappingProvider.getMappedTargets();
+    assertEquals(1, mappedTargets.size());
+
+    final MappedTarget mappedTarget = mappedTargets.get(0);
+    final MappedClass mappedClass = mappedTarget.getPrimaryMappedClass();
+    assertNotNull(mappedClass);
+    assertEquals(Serializable.class, mappedClass.getSourceClass());
+    assertTrue(mappedClass.getTargetName().isEmpty());
+    assertEquals(mappedTarget, mappedClass.getMappedTarget());
   }
 
   //
@@ -74,10 +105,6 @@ public final class SpecificationHandlerTest {
       multiplier *= 10;
     }
   }
-
-  @TargetMapping({
-      @TargetMappingEntry(source = Serializable.class, targetName = "my.generated.SerializableImpl")
-  })
   public static final class OrderedSpec1 extends OrdinalSumProvider {
     @Specification(priority = 1)
     public void spec1() {
@@ -111,5 +138,18 @@ public final class SpecificationHandlerTest {
     public void spec1() {
       inc(1);
     }
+  }
+
+  public static final class NoMappingSpec {
+    @Specification
+    public void spec() {}
+  }
+
+  @TargetMapping({
+      @TargetMappingEntry(source = Serializable.class, targetName = "my.generated.SerializableImpl")
+  })
+  public static final class TargetMappingSpec {
+    @Specification
+    public void spec() {}
   }
 }
