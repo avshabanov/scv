@@ -1,0 +1,44 @@
+@startuml
+
+package "SCV" #Yellow {
+    component [Plugin Extension\nPoints] as PluginExtender
+
+    component [Specification Processor] as SpecProcessor
+
+    component [Target Producer] as TargetProducer
+}
+
+node [Plugins] {
+
+    component [Persistence]
+    component [Delegation]
+    component [Serialization]
+    component [Externalization]
+
+}
+
+package "Developer Specification" #LightGray {
+    component [Specification A] as SpecA
+    component [Specification B] as SpecB
+}
+
+interface "Plugin\nDeveloper" as PluginDev
+interface "Application\nDeveloper" as AppDev
+interface "Generated\nCode" as GenCode
+
+PluginDev ..> PluginExtender : Write extension plugins
+
+AppDev -> SpecA : writes
+AppDev -> SpecB : writes
+
+SpecProcessor ..> SpecA : processes
+SpecProcessor ..> SpecB : processes
+
+SpecProcessor -> PluginExtender : use
+SpecProcessor -> TargetProducer : generate
+
+PluginExtender -> Plugins : use
+
+TargetProducer ..> GenCode : create
+
+@enduml

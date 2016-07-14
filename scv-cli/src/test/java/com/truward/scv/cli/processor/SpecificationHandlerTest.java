@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
  * Tests for {@link SpecificationHandler}.
  */
 public final class SpecificationHandlerTest {
+
   private SpecificationHandler specificationHandler;
   private TargetMappingProvider mappingProvider;
 
@@ -42,7 +43,7 @@ public final class SpecificationHandlerTest {
   }
 
   @Test
-  public void shouldSortSpecByPrioritites() {
+  public void shouldSortSpecByPriorities() {
     // spec 1
     OrdinalSumProvider sumProvider = specificationHandler.parseClass(OrderedSpec1.class);
     assertNotNull(sumProvider);
