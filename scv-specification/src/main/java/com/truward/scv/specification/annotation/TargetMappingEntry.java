@@ -19,12 +19,16 @@ public @interface TargetMappingEntry {
    *
    * @return List of source classes
    */
-  Class[] source();
+  Class[] source() default {};
 
   /**
    * Specially coded target name, e.g. {@code com.mycompany.generated.FooImpl}
    *
    * @return Coded target name
    */
-  String targetName();
+  String targetName() default "";
+
+  String targetPackageName() default "";
+
+  Class[] targetPackageClass() default {};
 }

@@ -153,4 +153,20 @@ public final class SpecificationHandlerTest {
     @Specification
     public void spec() {}
   }
+
+  @TargetMapping({
+      @TargetMappingEntry(source = Serializable.class, targetPackageName = "my.generated")
+  })
+  public static final class TargetMappingSpecWithPackageNameOutput {
+    @Specification
+    public void spec() {}
+  }
+
+  @TargetMapping({
+      @TargetMappingEntry(source = Serializable.class, targetPackageClass = SpecificationHandlerTest.class)
+  })
+  public static final class TargetMappingSpecWithPackageClassOutput {
+    @Specification
+    public void spec() {}
+  }
 }
