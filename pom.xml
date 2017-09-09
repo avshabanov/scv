@@ -13,6 +13,7 @@
     <module>scv-plugin-system</module>
     <module>scv-cli</module>
     <module>scv-contrib-plugins</module>
+    <module>scv-experiments</module>
   </modules>
 
   <scm>
